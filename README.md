@@ -159,7 +159,15 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ## Citation
 If you use this repository or the TMSA-Net model in your research, please cite:
 ```plaintext
-
+@article{zhao2025tmsa,
+  title={TMSA-Net: A novel attention mechanism for improved motor imagery EEG signal processing},
+  author={Zhao, Qian and Zhu, Weina},
+  journal={Biomedical Signal Processing and Control},
+  volume={102},
+  pages={107189},
+  year={2025},
+  publisher={Elsevier}
+}
 ```
 
 ---
