@@ -4,24 +4,24 @@ import cv2
 import config
 
 
-# Perform data augmentation for the given data and labels
+# 数据增强
 def data_augmentation(data, label):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     aug_data = []
     aug_label = []
 
-    N, C, T = data.shape  # Extract dimensions (batch size, channels, time steps)
-    seg_size = T // config.num_segs  # Calculate segment size
-    aug_data_size = config.batch_size // 4  # Determine augmentation data size
+    N, C, T = data.shape  # 提取维度（批量大小，通道数，时间步长）
+    seg_size = T // config.num_segs  # 计算分段大小
+    aug_data_size = config.batch_size // 4  # 确定增强数据大小
 
-    for cls in range(4):  # Iterate through each class
+    for cls in range(4):  # 遍历每个类别
         cls_idx = torch.where(label == cls)
         cls_data = data[cls_idx]
         data_size = cls_data.shape[0]
-        if data_size == 0 or data_size == 1:  # Skip if there is no or insufficient data
+        if data_size == 0 or data_size == 1:  # 如果没有或数据不足则跳过
             continue
         temp_aug_data = torch.zeros((aug_data_size, C, T), device=device)
-        for i in range(aug_data_size):  # Generate augmented data
+        for i in range(aug_data_size):  # 生成增强数据
             rand_idx = torch.randint(0, data_size, (config.num_segs,), device=device)
             for j in range(config.num_segs):
                 temp_aug_data[i, :, j * seg_size:(j + 1) * seg_size] = cls_data[rand_idx[j], :,

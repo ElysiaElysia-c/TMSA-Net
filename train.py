@@ -4,7 +4,7 @@ import time
 import matplotlib.pyplot as plt
 
 import torch
-from sklearn.metrics import accuracy_score, cohen_kappa_score
+from sklearn.metrics import accuracy_score, cohen_kappa_score # 计算准确率和kappa系数
 from torch import nn
 
 import config
@@ -12,7 +12,7 @@ from util import data_augmentation
 
 def train_evaluation(model: nn.Module, train_loader, test_loader, criterion, optimizer, scheduler, save_path,
                      epochs=config.epochs):
-    # Initialize log writer if a save path is provided
+    # 初始化日志文件
     log_writer = None
     if save_path is not None:
         log_writer = open(os.path.join(save_path, 'log.txt'), 'w')

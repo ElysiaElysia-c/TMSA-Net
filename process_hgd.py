@@ -14,8 +14,10 @@ from main import build_datasets_files
 log = logging.getLogger(__name__)
 log.setLevel('DEBUG')
 
+# 这个文件是对HGD数据集进行预处理
+
 """
-    # This code requires an older version of Braindecode to function properly.
+    # This code requires an older version of Braindecode to function properly. 
     # To install the compatible version, use:
     # pip install https://github.com/TNTLFreiburg/braindecode/archive/master.zip
 """
@@ -59,7 +61,7 @@ def preprocess_hgd(data_file, low_cut_hz, save_path, debug=False):
     cnt = cnt.pick_channels(C_sensors)
 
     log.info("Resampling...")
-    cnt = resample_cnt(cnt, 250.0)
+    cnt = resample_cnt(cnt, 250.0) # 重采样到250Hz
     log.info("Highpassing...")
     cnt = mne_apply(
         lambda a: highpass_cnt(
@@ -82,6 +84,8 @@ def preprocess_hgd(data_file, low_cut_hz, save_path, debug=False):
     return dataset
 
 if __name__ == '__main__':
+    # 数据集的路径 得改成你自己的
+    
     base_save_path = r'E:\EEG\dataset'
     #train_datasets = build_datasets_files(stage='train')
     test_datasets = build_datasets_files(stage='test')
